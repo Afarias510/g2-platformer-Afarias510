@@ -55,7 +55,7 @@ function preload() {
   platformImageLast = loadImage("assets/img/tiles/Tile (16).png");
 
   // load player animations
-  playerIdleAnimation = loadAnimation("assets/img/kunoichi/Idle__000.png", "assets/img/kunoichi/Idle__009.png");
+  playerIdleAnimation = loadAnimation("assets/captianamerica-full/captainamerica-full-0.png", "assets/captianamerica-full/captainamerica-full-11.png");
   playerRunAnimation = loadAnimation("assets/img/kunoichi/Run__000.png", "assets/img/kunoichi/Run__009.png");
   playerJumpAnimation = loadAnimation("assets/img/kunoichi/Jump__004.png");
   playerFallAnimation = loadAnimation("assets/img/kunoichi/Jump__009.png");
@@ -84,7 +84,7 @@ function draw() {
   updatePlayer();
   updateDisplay();
   drawSprites();
-  
+
 }
 
 // Called when player wins or loses
