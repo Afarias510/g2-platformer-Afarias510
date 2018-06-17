@@ -57,7 +57,7 @@ function preload() {
   // load player animations
   playerIdleAnimation = loadAnimation("assets/img/captainamerica-full/captainamerica-full-0.png", "assets/img/captainamerica-full/captainamerica-full-11.png");
   playerRunAnimation = loadAnimation("assets/img/captainamerica-star/captainamerica-star-0.png", "assets/img/captainamerica-star/captainamerica-star-6.png");
-  playerJumpAnimation = loadAnimation("assets/img/kunoichi/Jump__004.png");
+  playerJumpAnimation = loadAnimation("assets/img/captainamerica-jump/captainamerica-jump-1.png", "assets/img/captainamerica-jump/captainamerica-jump-9.png");
   playerFallAnimation = loadAnimation("assets/img/captainamerica-catch/captainamerica-catch-0.png", "assets/img/captainamerica-catch/captainamerica-catch-29.png");
 
   // load monster animations
@@ -123,7 +123,7 @@ function createPlayer() {
   player.addAnimation("jump", playerJumpAnimation).looping = false;
   player.addAnimation("fall", playerFallAnimation).looping = false;
   player.scale = 1;
-  player.setCollider("rectangle", 0, 0, 250, 490);
+  player.setCollider("rectangle", 0, 0, 100, 100);
   //player.debug = true;
 }
 
