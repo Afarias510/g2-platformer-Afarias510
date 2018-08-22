@@ -112,6 +112,18 @@ function buildLevel() {
   createPlatform(50, 690, 5);
   createCollectable(300, 340);
   createMonster(500, 600, -1);
+  //second platform
+   createPlatform(850, 645, 3);
+   createMonster(1085, 530, 0);
+   createCollectable(1085, 320);
+   createCollectable(1300, 420);
+  // third platform
+  createPlatform(1450, 595, 4);
+  createCollectable(1600, 320);
+  createMonster(1730, 470, 0);
+  createCollectable(1730, 240);
+  // fourth platform
+  createPlatform(2050, 470, 2);
 
 }
 
