@@ -52,7 +52,7 @@ window.addEventListener("keydown", function(e) {
 
 function preload() {
   // load background image
-  backgroundImage = loadImage("assets/img/backgrounds/smashBro.jpg");
+  backgroundImage = loadImage("assets/img/backgrounds/smashBro.png");
 
   // load platform images
   platformImageFirst = loadImage("assets/img/tiles/Tile (14).png");
