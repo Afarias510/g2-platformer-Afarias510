@@ -13,8 +13,10 @@ var playerStartX, playerStartY;
 
 // Monster Variables
 var monsters; // p5.play sprite group
-var monsterWalkAnimation;
+var thanosWalkAnimation;
 var monsterDefeatImage;
+var thanosIdleAnimation;
+var thanosGrounded;
 
 // Other Game Object Variables
 var collectables;
@@ -33,6 +35,9 @@ const MAX_JUMP_TIME = 2000; //milliseconds
 var currentJumpTime;
 var millis, deltaMillis;
 var gamePaused;
+// sound
+var myMusic;
+
 
 // This allows the player to press any of the arrow keys (as well as spacebar, just
 // in case you wanted to program that eventually) without interfering with the
@@ -47,7 +52,7 @@ window.addEventListener("keydown", function(e) {
 
 function preload() {
   // load background image
-  backgroundImage = loadImage("assets/img/backgrounds/BG.png");
+  backgroundImage = loadImage("assets/img/backgrounds/smashBro.jpg");
 
   // load platform images
   platformImageFirst = loadImage("assets/img/tiles/Tile (14).png");
@@ -61,9 +66,9 @@ function preload() {
   playerFallAnimation = loadAnimation("assets/img/captainamerica-catch/captainamerica-catch-0.png", "assets/img/captainamerica-catch/captainamerica-catch-29.png");
 
   // load monster animations
-  monsterWalkAnimation = loadAnimation("assets/img/monster/frame-1.png", "assets/img/monster/frame-10.png");
-  monsterDefeatImage = loadImage("assets/img/monster/defeat-frame-3.png");
-
+  thanosWalkAnimation = loadAnimation("assets/img/thanos-walk/than-walk_001.png", "assets/img/thanos-walk/than-walk_008.png");
+  thanosDefeatAnimation = loadAnimation("assets/img/thanos-poof/thanos-poof_001.png", "assets/img/thanos-poof/thanos-poof_008.png" );
+  thanosIdleAnimation = loadAnimation("assets/img/thanos-stand/than-stand_001.png", "assets/img/thanos-stand/than-stand_006.png")
   // load other game object images
   collectableImage = loadImage("assets/img/kunoichi/Kunai.png");
   goalImage = loadImage("assets/img/objects/Goal.png");
@@ -95,6 +100,7 @@ function resetGame() {
   currentJumpForce = DEFAULT_JUMP_FORCE;
   currentJumpTime = MAX_JUMP_TIME;
   playerGrounded = false;
+  thanosGrounded = false;
   score = 0;
   gamePaused = false;
   loop();
@@ -111,16 +117,16 @@ function buildLevel() {
   // best method is to draw sprites from left to right on the screen
   createPlatform(50, 690, 5);
   createCollectable(300, 340);
-  createMonster(500, 600, -1);
+  createThanos(500, 600, -1);
   //second platform
    createPlatform(850, 645, 3);
-   createMonster(1085, 530, 0);
+   createThanos(1085, 530, 0);
    createCollectable(1085, 320);
    createCollectable(1300, 420);
   // third platform
   createPlatform(1450, 595, 4);
   createCollectable(1600, 320);
-  createMonster(1730, 470, 0);
+  createThanos(1730, 470, 0);
   createCollectable(1730, 240);
   // fourth platform
   createPlatform(2050, 470, 2);
@@ -162,13 +168,14 @@ function createPlatform(x, y, len) {
 
 // Creates a monster sprite and adds animations and a collider to it.
 // Also sets the monster's initial velocity.
-function createMonster(x, y, velocity) {
+function createThanos(x, y, velocity) {
   var monster = createSprite(x, y, 0, 0);
   monster.addToGroup(monsters);
-  monster.addAnimation("walk", monsterWalkAnimation).loop = true;
+  monster.addAnimation("walk", thanosWalkAnimation).loop = true;
+  monster.addAnimation("idle", thanosIdleAnimation).loop = true;
   monster.changeAnimation("walk");
-  monster.scale = 0.25;
-  monster.setCollider("rectangle", 0, 7, 300, 160);
+  monster.scale = 0.90;
+  monster.setCollider("rectangle", 0, 0, 100, 140);
   monster.velocity.x = velocity;
   if(monster.velocity.x <= 0) {
     monster.mirrorX(-1);
@@ -237,7 +244,7 @@ function playerMonsterCollision(player, monster) {
 if(player.touching.bottom) {
    monster.remove();
    var defeatedMonster = createSprite(monster.position.x, monster.position.y, 0, 0);
-defeatedMonster.addImage(monsterDefeatImage);
+defeatedMonster.addAnimation(thanosDefeatAnimation);
 defeatedMonster.mirrorX(monster.mirrorX());
 defeatedMonster.scale = 0.25;
 defeatedMonster.life = 40;
@@ -286,6 +293,7 @@ function checkIdle() {
 function checkFalling() {
   if(!playerGrounded && player.velocity.y > 0) {
     player.changeAnimation("fall");
+
   }
 }
 
@@ -323,7 +331,17 @@ function checkMovingLeftRight() {
         player.velocity.x = DEFAULT_VELOCITY;
     }
 }
+// check if monster Idle
+/*function monsterIdle() {
+  if(!keyIsDown("S") && !keyIsDown("W") && thanosGrounded) {
+    player.changeAnimation("idle");
+    player.velocity.x = 0;
+}
+// check monster jumping
+function monsterJumping(){
 
+}
+*/
 // Check if the player has pressed the up arrow key. If the player is grounded
 // this should initiate the jump sequence, which can be extended by holding down
 // the up arrow key (see checkJumping() above).
