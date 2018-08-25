@@ -61,7 +61,7 @@ function preload() {
 
   // load player animations
   playerIdleAnimation = loadAnimation("assets/img/captainamerica-full/captainamerica-full-0.png", "assets/img/captainamerica-full/captainamerica-full-11.png");
-  playerRunAnimation = loadAnimation("assets/img/captainamerica-star/captainamerica-star-0.png", "assets/img/captainamerica-star/captainamerica-star-6.png");
+  playerRunAnimation = loadAnimation("assets/img/cap-walk/cap-walk_001.png", "assets/img/cap-walk/cap-walk_011.png");
   playerJumpAnimation = loadAnimation("assets/img/captainamerica-jump/captainamerica-jump-1.png", "assets/img/captainamerica-jump/captainamerica-jump-9.png");
   playerFallAnimation = loadAnimation("assets/img/captainamerica-catch/captainamerica-catch-0.png", "assets/img/captainamerica-catch/captainamerica-catch-29.png");
 
@@ -181,7 +181,7 @@ function createThanos(x, y, velocity) {
     monster.mirrorX(-1);
   }
   else {
-    monster.mirrorX(1);
+    monster.mirrorX(-1);
   }
   //monster.debug = true;
 }
@@ -366,7 +366,7 @@ function keyReleased() {
 // keyTyped() for this because it is not case sensitive (whereas keyPressed() is).
 // Therefore, the player can press "P" or "p" and the game will be paused either way.
 function keyTyped() {
-
+if(keyCode === )
 }
 
 // Called in the draw() loop. Constantly refreshes the canvas, including static
